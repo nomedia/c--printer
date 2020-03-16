@@ -29,7 +29,8 @@ namespace TestTSPL
         Socket socketSend;
         //创建接收客户端发送消息的线程
         Thread threadReceive;
-        private object txt_IP;
+        private string txt_IP;
+        private string txt_Port;
 
         /// <summary>
         /// 连接
