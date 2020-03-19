@@ -8,3 +8,13 @@
 \\Mac\Home\Desktop\paopaoji\C#\obj\x86\Debug\TestTSPL.exe
 \\Mac\Home\Desktop\paopaoji\C#\obj\x86\Debug\TestTSPL.pdb
 \\Mac\Home\Desktop\paopaoji\C#\obj\x86\Debug\TestTSPL.FrmClient.resources
+\\Mac\Home\Desktop\paopaoji\c--printer\bin\Debug\TestTSPL.exe.config
+\\Mac\Home\Desktop\paopaoji\c--printer\bin\Debug\TestTSPL.exe
+\\Mac\Home\Desktop\paopaoji\c--printer\bin\Debug\TestTSPL.pdb
+\\Mac\Home\Desktop\paopaoji\c--printer\obj\x86\Debug\TestTSPL.csprojAssemblyReference.cache
+\\Mac\Home\Desktop\paopaoji\c--printer\obj\x86\Debug\TestTSPL.Form1.resources
+\\Mac\Home\Desktop\paopaoji\c--printer\obj\x86\Debug\TestTSPL.FrmClient.resources
+\\Mac\Home\Desktop\paopaoji\c--printer\obj\x86\Debug\TestTSPL.Properties.Resources.resources
+\\Mac\Home\Desktop\paopaoji\c--printer\obj\x86\Debug\TestTSPL.csproj.GenerateResource.cache
+\\Mac\Home\Desktop\paopaoji\c--printer\obj\x86\Debug\TestTSPL.exe
+\\Mac\Home\Desktop\paopaoji\c--printer\obj\x86\Debug\TestTSPL.pdb
