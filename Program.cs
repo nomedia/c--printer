@@ -14,7 +14,7 @@ namespace TestTSPL
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmClient());
+            Application.Run(new Form1());
         }
     }
 }

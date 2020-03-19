@@ -10,9 +10,16 @@ using System.Threading;
 using System.Net;
 using System.IO;
 
+using System.Web.Script.Serialization;
+using Newtonsoft.Json;
+
 namespace TestTSPL
 {
- 
+    public class Person
+    {
+        public int id { get; set; }
+        public int send_address_id { get; set; }
+    }
 
     public partial class Form1 : Form
     {
@@ -98,7 +105,33 @@ namespace TestTSPL
 
             return retString;
         }
+
         private void button1_Click(object sender, EventArgs e)
+        {
+            string json = GetHttpResponse("http://superpao.aiweber.com/api/printer", 30000);
+           // MessageBox.Show( rs);
+
+
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Person[] persons = js.Deserialize<Person[]>(json);
+
+
+
+            dynamic jsonObj = JsonConvert.DeserializeObject(json);
+
+            foreach (var obj in jsonObj)
+            {
+               MessageBox.Show(obj);
+           //     Console.WriteLine(obj.id);
+            }
+           
+
+
+
+
+        }
+
+            private void button1_Click2(object sender, EventArgs e)
         {
             int result = 0;
             byte [] msg=new byte [512];
