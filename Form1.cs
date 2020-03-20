@@ -12,9 +12,11 @@ using System.IO;
 
 using System.Web.Script.Serialization;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace TestTSPL
 {
+ 
     public class Person
     {
         public int id { get; set; }
@@ -116,22 +118,21 @@ namespace TestTSPL
             Person[] persons = js.Deserialize<Person[]>(json);
 
 
-
-            dynamic jsonObj = JsonConvert.DeserializeObject(json);
-
-            foreach (var obj in jsonObj)
+            dynamic dynJson = JsonConvert.DeserializeObject(json);
+            foreach (var item in dynJson)
             {
-               MessageBox.Show(obj);
-           //     Console.WriteLine(obj.id);
+                Console.WriteLine("{0} {1} {2} {3}\n", item.id, item.send_address_id,
+                    item.user_id, item.receive_address.nickname);
+                printer(item);
+
+
             }
-           
-
-
-
+          //  MessageBox.Show(str.ToString(), "TestTSPL", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
+            return;
 
         }
 
-            private void button1_Click2(object sender, EventArgs e)
+            private void printer(JObject obj)
         {
             int result = 0;
             byte [] msg=new byte [512];
@@ -164,7 +165,7 @@ namespace TestTSPL
                     //打印机自测  如果需要请先去掉注释
               //     tspl_dll.TSPL_SelfTest(dll.printer);
 
-                 tspl_dll.TSPL_ClearBuffer(dll.printer);
+                    tspl_dll.TSPL_ClearBuffer(dll.printer);
                     tspl_dll.TSPL_Setup(dll.printer, 100, 60, 4,   10, 1,1, 0);
                   //  result = tspl_dll.TSPL_BitMap(dll.printer, 0, 0, 0, @"md\1000004975.jpg");
 
@@ -191,7 +192,7 @@ namespace TestTSPL
 
 
 
-                    data = gbk.GetBytes("寄：3-03");
+                    data = gbk.GetBytes("寄："+obj.receive_address.nickname);
 
                     result = tspl_dll.TSPL_Text(dll.printer, 210, 430, 9, 3, 2, 2, data);
 
