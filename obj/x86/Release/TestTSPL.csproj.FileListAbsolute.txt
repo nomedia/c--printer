@@ -1,0 +1,13 @@
+\\Mac\Home\Desktop\paopaoji\c--printer\bin\Release\TestTSPL.exe.config
+\\Mac\Home\Desktop\paopaoji\c--printer\bin\Release\TestTSPL.exe
+\\Mac\Home\Desktop\paopaoji\c--printer\bin\Release\TestTSPL.pdb
+\\Mac\Home\Desktop\paopaoji\c--printer\bin\Release\Newtonsoft.Json.dll
+\\Mac\Home\Desktop\paopaoji\c--printer\bin\Release\Newtonsoft.Json.xml
+\\Mac\Home\Desktop\paopaoji\c--printer\obj\x86\Release\TestTSPL.csprojAssemblyReference.cache
+\\Mac\Home\Desktop\paopaoji\c--printer\obj\x86\Release\TestTSPL.Form1.resources
+\\Mac\Home\Desktop\paopaoji\c--printer\obj\x86\Release\TestTSPL.FrmClient.resources
+\\Mac\Home\Desktop\paopaoji\c--printer\obj\x86\Release\TestTSPL.Properties.Resources.resources
+\\Mac\Home\Desktop\paopaoji\c--printer\obj\x86\Release\TestTSPL.csproj.GenerateResource.cache
+\\Mac\Home\Desktop\paopaoji\c--printer\obj\x86\Release\TestTSPL.csproj.CopyComplete
+\\Mac\Home\Desktop\paopaoji\c--printer\obj\x86\Release\TestTSPL.exe
+\\Mac\Home\Desktop\paopaoji\c--printer\obj\x86\Release\TestTSPL.pdb

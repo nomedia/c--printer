@@ -17,12 +17,7 @@ using Newtonsoft.Json.Linq;
 namespace TestTSPL
 {
  
-    public class Person
-    {
-        public int id { get; set; }
-        public int send_address_id { get; set; }
-    }
-
+ 
     public partial class Form1 : Form
     {
         public Form1()
@@ -108,32 +103,94 @@ namespace TestTSPL
             return retString;
         }
 
+        //实例化一个timer  
+ System.Windows.Forms.Timer myTimer = new System.Windows.Forms.Timer();
+
+        public int stared=0;
+
+        public int printed = 0;
+        private void StopTimeBtn_Click(object sender, EventArgs e)//停止计时  
+        {
+            //计时开始  
+       myTimer.Stop();
+        }
+        //回调函数  
+        private void Callback(object sender, EventArgs e)
+        {
+            //获取系统时间 20:16:16  
+          label1.Text ="时间："+ DateTime.Now.ToLongTimeString().ToString();
+
+           startPrinter();
+        }
+
         private void button1_Click(object sender, EventArgs e)
+        {
+
+
+            if (stared == 0) {
+                this.button1.Text = "关闭";
+                stared = 1;
+                //给timer挂起事件  
+                myTimer.Tick += new EventHandler(Callback);
+            //使timer可用  
+            myTimer.Enabled = true;
+            //设置时间间隔，以毫秒为单位  
+            myTimer.Interval = 1000;//1s  
+            }
+            else
+            {
+                myTimer.Stop();
+                this.button1.Text = "开始";
+                stared = 0;
+            }
+
+        }
+        private void startPrinter()
         {
             string json = GetHttpResponse("http://superpao.aiweber.com/api/printer", 30000);
            // MessageBox.Show( rs);
 
 
             JavaScriptSerializer js = new JavaScriptSerializer();
-            Person[] persons = js.Deserialize<Person[]>(json);
+          //  Person[] persons = js.Deserialize<Person[]>(json);
 
 
             dynamic dynJson = JsonConvert.DeserializeObject(json);
             foreach (var item in dynJson)
             {
-                Console.WriteLine("{0} {1} {2} {3}\n", item.id, item.send_address_id,
-                    item.user_id, item.receive_address.nickname);
-                printer(item);
+                Console.WriteLine("{0} {1} {2} {3}\n", item.fee, item.payed, item.created_at, item.id, item.id);
+                //   printer(item.send_address.nickname,item.receive_address.nickname,item.receive_address.sname,item.num_big,item.num_small,item.fee, item.fee,item.created_at,item.id,item.id);
+
+                string ji = item.send_address.nickname;
+                string mdd = item.receive_address.city_name;
+                string da = item.num_big;
+                string xiao = item.num_small;
+                string yun = item.fee;
+                string wei = item.fee;
+                string time = item.created_at;
+                string code = item.id;
+                string dang = item.id;
+
+                string shou = item.receive_address.nickname;
+
+
+                printer(ji,shou,mdd,da,xiao,yun,wei,time,code,dang);
 
 
             }
-          //  MessageBox.Show(str.ToString(), "TestTSPL", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
+            //  MessageBox.Show(str.ToString(), "TestTSPL", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
             return;
 
         }
 
-            private void printer(JObject obj)
+       private void printer(string ji,string shou,string mdd,string da,string xiao,string yun,string wei,string time,string code,string dang)
+
+          
         {
+
+
+            printed++;
+
             int result = 0;
             byte [] msg=new byte [512];
             tspl_dll dll = new tspl_dll();
@@ -192,38 +249,59 @@ namespace TestTSPL
 
 
 
-                    data = gbk.GetBytes("寄："+obj.receive_address.nickname);
+                    data = gbk.GetBytes("寄："+ji);
 
                     result = tspl_dll.TSPL_Text(dll.printer, 210, 430, 9, 3, 2, 2, data);
 
-                    data = gbk.GetBytes("收：陈孝右");
+                    data = gbk.GetBytes("收："+shou);
 
                     result = tspl_dll.TSPL_Text(dll.printer, 270, 430, 9, 3, 2, 2, data);
 
-                    data = gbk.GetBytes("目地：上海");
+                    data = gbk.GetBytes("目地："+mdd);
 
                     result = tspl_dll.TSPL_Text(dll.printer, 330, 430, 9, 3, 2, 2, data);
 
-                    data = gbk.GetBytes("大件：12");
+                    data = gbk.GetBytes("大件:"+da);
 
                     result = tspl_dll.TSPL_Text(dll.printer, 390, 430, 9, 3, 2, 2, data);
 
-                    data = gbk.GetBytes("运费：12");
+
+                    data = gbk.GetBytes("小件:" + xiao);
+
+                    result = tspl_dll.TSPL_Text(dll.printer, 390, 230, 9, 3, 2, 2, data);
+
+
+                    data = gbk.GetBytes("运费："+xiao);
 
                     result = tspl_dll.TSPL_Text(dll.printer, 450, 430, 9, 3, 2, 2, data);
 
 
-                  
+                    string status = "未付";
+
+                    if (wei == "1")
+                    {
+                        status = "已付";
+
+                    }
+
+                    data = gbk.GetBytes(status);
+
+                    result = tspl_dll.TSPL_Text(dll.printer, 450, 230, 9, 3, 2, 2, data);
+
+
+
 
                     //    result = tspl_dll.TSPL_Text(dll.printer, 200, 350, 9, 3, 1, 1, data);
                     //QRCODE
-                    result = tspl_dll.TSPL_QrCode(dll.printer, 530, 200, 3,6, 0, 5, 0, 7, "\"http://www.baidu.com\"");
 
-                    data = gbk.GetBytes("单号：1231242132");
+                    string url = "http://superpao.aiweber.com/record/"+code;
+                    result = tspl_dll.TSPL_QrCode(dll.printer, 530, 150, 3,5, 0, 5, 0, 5, "\""+ url + "\"");
+
+                    data = gbk.GetBytes("单号："+dang);
 
                     result = tspl_dll.TSPL_Text(dll.printer, 730, 430, 9, 3, 1, 1, data);
 
-                    data = gbk.GetBytes("2012-03-10 13:12:22");
+                    data = gbk.GetBytes(time);
 
                     result = tspl_dll.TSPL_Text(dll.printer, 760, 430, 9, 3, 1, 1, data);
                     //BITMAP
@@ -338,6 +416,14 @@ namespace TestTSPL
             public IntPtr printer;
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
 
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
